@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="result" readonly>
+            <div id="showanswer">0</div>
+        </div>
+        <div class="buttons">
+            <button class="operator" id="delete"><b>←</b></button>
+            <button id="oB">(</button>
+            <button id="sqr">^</button>
+            <button id="cB">)</button>
+            
+            <button class="operator" id="ndiv">/</button>
+            <button id="n7">7</button>
+            <button id="n8">8</button>
+            <button id="n9">9</button>
+            <button class="operator" id="nmul">*</button>
+            <button id="n4">4</button>
+            <button id="n5">5</button>
+            <button id="n6">6</button>
+            <button class="operator" id="nmin">-</button>
+            <button id="n1">1</button>
+            <button id="n2">2</button>
+            <button id="n3">3</button>
+            <button class="operator" id="nplu">+</button>
+            <button class="zero">0</button>
+            <button id="dec">.</button>
+            <button class="equal">=</button>
+        </div>
+    </div>
+    <script src="jquery.js" >
+    </script>    
+    <script>
+    
+$(document).ready(function(){	
+
+	var digits='';
+	
+	$('#n1').click(function(){
+		digits = digits.concat('1');
+		$('#result').val(digits);
+	});
+	$('#n2').click(function(){
+		digits = digits.concat('2');
+		$('#result').val(digits);
+	});
+	$('#n3').click(function(){
+		digits = digits.concat('3');
+		$('#result').val(digits);
+	});
+	$('#n4').click(function(){
+		digits = digits.concat('4');
+		$('#result').val(digits);
+	});
+	$('#n5').click(function(){
+		digits = digits.concat('5');
+		$('#result').val(digits);
+	});
+	$('#n6').click(function(){
+		digits = digits.concat('6');
+		$('#result').val(digits);
+	});
+	$('#n7').click(function(){
+		digits = digits.concat('7');
+		$('#result').val(digits);
+	});
+	$('#n8').click(function(){
+		digits = digits.concat('8');
+		$('#result').val(digits);
+	});
+	$('#n9').click(function(){
+		digits = digits.concat('9');
+		$('#result').val(digits);
+	});
+	$('.zero').click(function(){
+		digits = digits.concat('0');
+		$('#result').val(digits);
+	});
+	
+	// specials
+	
+	$('#dec').click(function(){
+		digits = digits.concat('.');
+		$('#result').val(digits);
+	});
+	$('#ndiv').click(function(){
+		digits = digits.concat('/');
+		$('#result').val(digits);
+	});
+	$('#nplu').click(function(){
+		digits = digits.concat('+');
+		$('#result').val(digits);
+	});
+	$('#nmin').click(function(){
+		digits = digits.concat('-');
+		$('#result').val(digits);
+	});
+	$('#nmul').click(function(){
+		digits = digits.concat('*');
+		$('#result').val(digits);
+	});
+	
+	$('#oB').click(function(){
+		digits = digits.concat('(');
+		$('#result').val(digits);
+	});
+	$('#sqr').click(function(){
+		digits = digits.concat('^');
+		$('#result').val(digits);
+	});
+	$('#cB').click(function(){
+		digits = digits.concat(')');
+		$('#result').val(digits);
+	});
+
+	
+	
+	$('#delete').click(function(){
+		var len = digits.length;
+		digits = digits.substr(0,len-1);
+		$('#result').val(digits);
+	});
+	
+	
+	$(document).keydown(function(event){
+		
+			switch(event.keyCode){
+				// 1-0 keycodes
+				case 49:
+					$('#n1').click();
+					break;
+				case 50:
+					$('#n2').click();
+					break;
+				case 51:
+					$('#n3').click();
+					break;
+				case 52:
+					$('#n4').click();
+					break;
+				case 53:
+					$('#n5').click();
+					break;
+				case 54:
+					$('#n6').click();
+					break;
+				case 55:
+					$('#n7').click();
+					break;
+				case 56:
+					$('#n8').click();
+					break;
+				case 57:
+					$('#n9').click();
+					break;
+				case 58:
+					$('.zero').click();
+					break;
+					
+				// these are from the numpads [PC KEYBOARD]
+				case 110: // '.'
+					$('#dec').click();
+					break;
+				case 46:  // delete
+					digits=0; // this is better than ever for this case
+					$('#result').val(digits);
+					break;
+				
+				case 8: // backspace
+					$('#delete').click();
+					break;
+				case 111: // '/'
+					$('#ndiv').click();
+					break;
+				case 106: // '*'
+					$('#nmul').click();
+					break;
+				case 107: // '+'
+					$('#nplu').click();
+					break;
+				case 109:
+					$('#nmin').click();
+					break;
+					
+				// now for the NumPad
+				// 0-9
+				case 96:
+					$('.zero').click();
+					break;
+				case 97:
+					$('n1').click();
+					break;
+				case 98:
+					$('n2').click();
+					break;
+				case 99:
+					$('n3').click();
+					break;
+				case 100:
+					$('n4').click();
+					break;
+				case 101:
+					$('n5').click();
+					break;
+				case 102:
+					$('n6').click();
+					break;
+				case 103:
+					$('n7').click();
+					break;
+				case 104:
+					$('n8').click();
+					break;
+				case 105:
+					$('n9').click();
+					break;
+	
+			}
+			
+	});
+	
+	// here the user gets the answer
+	$('.equal').click(function(){
+		var data = encodeURIComponent(digits);
+		var full_url = 'http://api.mathjs.org/v4/?expr='+data;
+		var limit = 10000; // 10 seconds - ajax time
+		var check = 'calc'; // for the detection of offline and online
+		
+		$.ajax({
+			url: full_url,
+			type: "GET",
+			success: function(response) {
+				setTimeout(function() {
+					var check = response.indexOf('Error'); 
+					// when check = -1 means we are good
+					
+					if(check==-1){
+						$('#showanswer').text(response);
+					}else{
+						// we are good now no errors hence 
+						// pretty answer
+						$('#showanswer').text('Bad Syntax!');
+					}
+					
+				}, limit);
+			},
+			error: function(err) {
+					if(check=='calc'){
+						alert(full_url);
+						//$('#showanswer').text('You\'re Offline!');
+					}
+					// $('#showanswer').text('Syntax Error!: '+err.responseText) // - > debugging err.responseText
+			}
+		});
+	});
+	
+
+});	    
+
+/*
+	Author: Masterplan
+	Time: Sun, Ag 06 2023 18:48 EAC
+*/
+    </script>
+</body>
+</html>
+
+
