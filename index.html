@@ -230,7 +230,7 @@ $(document).ready(function(){
 	// here the user gets the answer
 	$('.equal').click(function(){
 		var data = encodeURIComponent(digits);
-		var full_url = 'http://api.mathjs.org/v4/?expr='+data;
+		var full_url = 'https://api.mathjs.org/v4/?expr='+data;
 		var limit = 10000; // 10 seconds - ajax time
 		var check = 'calc'; // for the detection of offline and online
 		
