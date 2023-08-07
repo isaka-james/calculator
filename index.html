@@ -255,9 +255,8 @@ $(document).ready(function(){
 				}, limit);
 			},
 			error: function(err) {
-					if(check=='calc'){
-						//$('#showanswer').text('You\'re Offline!');
-					}
+					$('#showanswer').text('Bad Syntax!');
+					
 					// $('#showanswer').text('Syntax Error!: '+err.responseText) // - > debugging err.responseText
 			}
 		});
