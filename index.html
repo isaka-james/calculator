@@ -254,18 +254,11 @@ $(document).ready(function(){
 					
 				}, limit);
 			},
-			statusCode: {
-    			400: function(xhr) {
-      				$('#showanswer').text('Bad Syntax!');
-    			}
-			}
-			/*
 			error: function(err) {
 					$('#showanswer').text('Bad Syntax!');
 					
 					// $('#showanswer').text('Syntax Error!: '+err.responseText) // - > debugging err.responseText
 			}
-			*/
 		});
 	});
 	
