@@ -11,7 +11,7 @@
 <body>
     <div class="calculator">
         <div class="display">
-            <input type="text" id="result" readonly value="0">
+            <input type="text" id="result" readonly >
             <div id="showanswer">0</div>
         </div>
         <div class="buttons">
@@ -242,15 +242,7 @@ $(document).ready(function(){
 			success: function(response) {
 				setTimeout(function() {
 					var check = response.indexOf('Error'); 
-					// when check = -1 means we are good
-					
-					if(check==-1){
-						$('#showanswer').text(response);
-					}else{
-						// we are good now no errors hence 
-						// pretty answer
-						$('#showanswer').text('Bad Syntax!');
-					}
+					$('#showanswer').text(response);
 					
 				}, limit);
 			},
