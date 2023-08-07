@@ -246,10 +246,10 @@ $(document).ready(function(){
 					
 				}, limit);
 			},
-			error: function(err) {
-					$('#showanswer').text('Bad Syntax!');
-					
-					// $('#showanswer').text('Syntax Error!: '+err.responseText) // - > debugging err.responseText
+			statusCode: {
+    			400: function(xhr) {
+      				$('#showanswer').text('Bad Syntax!');
+    			}
 			}
 		});
 	});
