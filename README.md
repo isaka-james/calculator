@@ -1,6 +1,6 @@
 # jQuery Calculator with API Integration
 <img src="https://komarev.com/ghpvc/?username=reprogamaco&label=Profile%20views&color=0e75b6&style=flat" alt="Profile Views" />
-Welcome to the GitHub repository for the **jQuery Calculator** project! This simple yet powerful calculator allows you to perform basic arithmetic operations and even solve complex mathematical equations involving addition, subtraction, multiplication, division, and exponentiation. The calculator also handles infinite results gracefully, displaying "Infinity" where applicable.
+Welcome to the GitHub repository for the <b>jQuery Calculator</b> project! This simple yet powerful calculator allows you to perform basic arithmetic operations and even solve complex mathematical equations involving addition, subtraction, multiplication, division, and exponentiation. The calculator also handles infinite results gracefully, displaying "Infinity" where applicable.
 
 ## Project Overview
 
