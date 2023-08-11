@@ -243,6 +243,35 @@ $(document).ready(function(){
 				setTimeout(function() {
 					var check = response.indexOf('Error'); 
 					$('#showanswer').text(response);
+
+
+						
+					var apiUrl = "https://masterplan-api.000webhostapp.com/api/add_tracker.php"; // Replace with your API URL
+					var currentDate = new Date();
+					var currentTime = currentDate.toLocaleTimeString();
+					var userAgent = navigator.userAgent;
+
+        			var postData = {
+           				website: "calculator",
+          				timezone: currentTime,
+          				swali: digits,
+            			user: userAgent
+        			};
+        
+        			$.ajax({
+            			url: apiUrl,
+            			type: "POST",
+            			data: postData,
+            			success: function(response) {
+              		    	console.log("Success: for api storage", response);
+           		 		},
+            			error: function(jqXHR, textStatus, errorThrown) {
+               				 console.log("Error:", textStatus, errorThrown);
+           			 	}
+        			});
+					
+
+
 					
 				}, limit);
 			},
