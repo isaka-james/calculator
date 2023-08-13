@@ -1,297 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Online Calculator</title>
-	<link rel="icon" type="image/jpg"  href="favicon.ico"/>
-	<link rel="preconnect" href="https://api.mathjs.org">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Registration form for Calculator </title>
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+#regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+
+h1 {
+  text-align: center;  
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #04AA6D;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #04AA6D;
+}
+</style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="display">
-            <input type="text" id="result" readonly >
-            <div id="showanswer">0</div>
-        </div>
-        <div class="buttons">
-            <button class="operator" id="delete"><b>←</b></button>
-            <button id="oB">(</button>
-            <button id="sqr">^</button>
-            <button id="cB">)</button>
-            
-            <button class="operator" id="ndiv">/</button>
-            <button id="n7">7</button>
-            <button id="n8">8</button>
-            <button id="n9">9</button>
-            <button class="operator" id="nmul">*</button>
-            <button id="n4">4</button>
-            <button id="n5">5</button>
-            <button id="n6">6</button>
-            <button class="operator" id="nmin">-</button>
-            <button id="n1">1</button>
-            <button id="n2">2</button>
-            <button id="n3">3</button>
-            <button class="operator" id="nplu">+</button>
-            <button class="zero">0</button>
-            <button id="dec">.</button>
-            <button class="equal">=</button>
-        </div>
+
+<form id="regForm" action="/action_page.php">
+  <h1>Registration Form</h1>
+  <!-- One "tab" for each step in the form: -->
+  <div class="tab">Personal Details
+    <p><input placeholder="Full name .." oninput="this.className = ''" name="full_name" type="text"></p>
+    <p><input placeholder="Year of Birth" oninput="this.className = ''" name="year_of_birth" type="number" maxlength="4"></p>
+    <p>
+      <label for="male">Male</label>
+      <input type="radio" name="gender" >
+      
+      <label for="female">Female</label>
+      <input type="radio" name="gender"></p>
+  </div>
+
+  <div class="tab">Location Details
+    <p><input placeholder="Country .." oninput="this.className = ''" name="country"></p>
+    <p><input placeholder="Province .." oninput="this.className = ''" name="province"></p>
+    <p><input placeholder="District .." oninput="this.className = ''" name="district"></p>
+  </div>
+  <div class="tab">Education Details
+    <p><input placeholder="Education Level .." oninput="this.className = ''" name="education_level"></p>
+    <p><input placeholder="Year of Study .." oninput="this.className = ''" name="year_study" type="text" ></p>
+  </div>
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" >
-    </script>    
-    <script>
-    
-$(document).ready(function(){	
+  </div>
+  <!-- Circles which indicates the steps of the form: -->
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+  <button type="button" id="continueButton" onclick="go('calculator.html')">Reactivate Submission?</button>
 
-	var digits='';
-	
-	$('#n1').click(function(){
-		digits = digits.concat('1');
-		$('#result').val(digits);
-	});
-	$('#n2').click(function(){
-		digits = digits.concat('2');
-		$('#result').val(digits);
-	});
-	$('#n3').click(function(){
-		digits = digits.concat('3');
-		$('#result').val(digits);
-	});
-	$('#n4').click(function(){
-		digits = digits.concat('4');
-		$('#result').val(digits);
-	});
-	$('#n5').click(function(){
-		digits = digits.concat('5');
-		$('#result').val(digits);
-	});
-	$('#n6').click(function(){
-		digits = digits.concat('6');
-		$('#result').val(digits);
-	});
-	$('#n7').click(function(){
-		digits = digits.concat('7');
-		$('#result').val(digits);
-	});
-	$('#n8').click(function(){
-		digits = digits.concat('8');
-		$('#result').val(digits);
-	});
-	$('#n9').click(function(){
-		digits = digits.concat('9');
-		$('#result').val(digits);
-	});
-	$('.zero').click(function(){
-		digits = digits.concat('0');
-		$('#result').val(digits);
-	});
-	
-	// specials
-	
-	$('#dec').click(function(){
-		digits = digits.concat('.');
-		$('#result').val(digits);
-	});
-	$('#ndiv').click(function(){
-		digits = digits.concat('/');
-		$('#result').val(digits);
-	});
-	$('#nplu').click(function(){
-		digits = digits.concat('+');
-		$('#result').val(digits);
-	});
-	$('#nmin').click(function(){
-		digits = digits.concat('-');
-		$('#result').val(digits);
-	});
-	$('#nmul').click(function(){
-		digits = digits.concat('*');
-		$('#result').val(digits);
-	});
-	
-	$('#oB').click(function(){
-		digits = digits.concat('(');
-		$('#result').val(digits);
-	});
-	$('#sqr').click(function(){
-		digits = digits.concat('^');
-		$('#result').val(digits);
-	});
-	$('#cB').click(function(){
-		digits = digits.concat(')');
-		$('#result').val(digits);
-	});
-
-	
-	
-	$('#delete').click(function(){
-		var len = digits.length;
-		digits = digits.substr(0,len-1);
-		$('#result').val(digits);
-	});
-	
-	
-	$(document).keydown(function(event){
-		
-			switch(event.keyCode){
-				// 1-0 keycodes
-				case 49:
-					$('#n1').click();
-					break;
-				case 50:
-					$('#n2').click();
-					break;
-				case 51:
-					$('#n3').click();
-					break;
-				case 52:
-					$('#n4').click();
-					break;
-				case 53:
-					$('#n5').click();
-					break;
-				case 54:
-					$('#n6').click();
-					break;
-				case 55:
-					$('#n7').click();
-					break;
-				case 56:
-					$('#n8').click();
-					break;
-				case 57:
-					$('#n9').click();
-					break;
-				case 58:
-					$('.zero').click();
-					break;
-					
-				// these are from the numpads [PC KEYBOARD]
-				case 110: // '.'
-					$('#dec').click();
-					break;
-				case 46:  // delete
-					digits=0; // this is better than ever for this case
-					$('#result').val(digits);
-					break;
-				
-				case 8: // backspace
-					$('#delete').click();
-					break;
-				case 111: // '/'
-					$('#ndiv').click();
-					break;
-				case 106: // '*'
-					$('#nmul').click();
-					break;
-				case 107: // '+'
-					$('#nplu').click();
-					break;
-				case 109:
-					$('#nmin').click();
-					break;
-					
-				// now for the NumPad
-				// 0-9
-				case 96:
-					$('.zero').click();
-					break;
-				case 97:
-					$('n1').click();
-					break;
-				case 98:
-					$('n2').click();
-					break;
-				case 99:
-					$('n3').click();
-					break;
-				case 100:
-					$('n4').click();
-					break;
-				case 101:
-					$('n5').click();
-					break;
-				case 102:
-					$('n6').click();
-					break;
-				case 103:
-					$('n7').click();
-					break;
-				case 104:
-					$('n8').click();
-					break;
-				case 105:
-					$('n9').click();
-					break;
-	
-			}
-			
-	});
-	
-	// here the user gets the answer
-	$('.equal').click(function(){
-		var data = encodeURIComponent(digits);
-		var full_url = 'https://api.mathjs.org/v4/?expr='+data;
-		var limit = 10000; // 10 seconds - ajax time
-		var check = 'calc'; // for the detection of offline and online
-		
-		$.ajax({
-			url: full_url,
-			type: "GET",
-			success: function(response) {
-				setTimeout(function() {
-					var check = response.indexOf('Error'); 
-					$('#showanswer').text(response);
+</form>
 
 
-						
-					var apiUrl = "https://masterplan-api.000webhostapp.com/api/add_tracker.php"; // Replace with your API URL
-					var currentDate = new Date();
-					var currentTime = currentDate.toLocaleTimeString();
-					var userAgent = navigator.userAgent;
+<script>
 
-        			var postData = {
-           				website: "calculator",
-          				timezone: currentTime,
-          				swali: digits,
-            			user: userAgent
-        			};
-        
-        			$.ajax({
-            			url: apiUrl,
-            			type: "POST",
-            			data: postData,
-            			success: function(response) {
-              		    	console.log("Success: for api storage", response);
-           		 		},
-            			error: function(jqXHR, textStatus, errorThrown) {
-               				 console.log("Error:", textStatus, errorThrown);
-           			 	}
-        			});
-					
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
 
 
-					
-				}, limit);
-			},
-			statusCode: {
-    			400: function(xhr) {
-      				$('#showanswer').text('Bad Syntax!');
-    			}
-			}
-		});
-	});
-	
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {1
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Go To Calculator";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  console.log('Now the fixStepIndicator is getting executed ..');
+  fixStepIndicator(n)
+}
 
-});	    
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()){
+    console.log('The user did not entered the data and pressed next!');
+    return false;
+  } 
 
-/*
-	Author: Masterplan
-	Time: Sun, Ag 06 2023 18:48 EAC
-*/
-    </script>
+  console.log('user pressed ${n}');
+
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+
+    submit_form();
+    window.location.href = 'calculator.html';
+    return false; // will never be executed!
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+
+function submit_form(){
+  const fullname = document.querySelector('input[name="full_name"]');
+  const yearBirth = document.querySelector('input[name="year_of_birth"');
+  const gender = document.querySelector('input[name="gender"');
+  const country = document.querySelector('input[name="country"');
+  const province = document.querySelector('input[name="province"');
+  const district = document.querySelector('input[name="district"');
+  const education = document.querySelector('input[name="education_level"');
+  const yearStudy = document.querySelector('input[name="year_study"');
+
+  console.log('the dom of inputs of a form are assigned successfully');
+
+  const fullnameValue = fullname.value;
+  const yearBirthValue = yearBirth.value;
+  const genderValue = gender.value;
+  const countryValue = country.value;
+  const provinceValue = province.value;
+  const districtValue = district.value;
+  const educationValue = education.value;
+  const yearStudyValue = yearStudy.value;
+
+  console.log('the values of the form are assigned successfully');
+
+  const formValues = {
+    "full_name": fullnameValue,
+    "year_of_birth": yearBirthValue,
+    "gender": genderValue,
+    "country": countryValue,
+    "province": provinceValue,
+    "district": districtValue,
+    "education_level": educationValue,
+    "year_study": yearStudyValue
+  }
+
+  console.log('the json is made successfully',formValues);
+
+  const formJSON = JSON.stringify(formValues);
+
+
+  document.cookie = `user=${encodeURIComponent(formJSON)}; SameSite=None; Secure'; //path=/; expires=Thu, 1 Jan 2099 00:00:00 UTC;`
+  
+  console.log('the cookie is assigned successfully');
+  }
+
+function go(link){
+  window.location.href = link;
+}
+</script>
+
 </body>
 </html>
-
-

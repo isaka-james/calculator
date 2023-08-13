@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Advanced Calculator</title>
+        <link rel="icon" type="image/jpg"  href="favicon.ico"/>
+        <link rel="preconnect" href="https://api.mathjs.org">
+<style>
+    p{
+        text-align: center;
+    }
+    
+    #close-botton{
+        text-align: center;
+        background-color: #121212;
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+
+
+    }
+    #countdown-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 20px;
+    }
+    #countdown{
+        font-size: 48px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    #left-div{
+        min-width: 340px !important;
+        flex: 0 !important;
+        background-color: lightblue !important;
+        margin-right: 10px !important;
+        border-radius: 12px;
+    }
+    #center-div{
+        min-width: 340px !important;
+        flex: 0 !important;
+        text-align: center !important;
+        margin-left: 10px;
+    }
+    .whole{
+        display: flex;
+    }
+    #little-space{
+        padding-top: 25px;
+    }
+
+
+ 
+</style>
+    </head>
+
+    <body>
+        
+      <div class="whole">
+        <div id="left-div">
+
+        </div>
+        <div class="calculator" id="center-div">
+            <div class="display">
+                <input type="text" id="result" readonly >
+                <div id="showanswer">0</div>
+            </div>
+            <div class="buttons">
+                <button class="operator" id="delete"><b>←</b></button>
+                <button id="oB">(</button>
+                <button id="sqr">^</button>
+                <button id="cB">)</button>
+                
+                <button class="operator" id="ndiv">/</button>
+                <button id="n7">7</button>
+                <button id="n8">8</button>
+                <button id="n9">9</button>
+                <button class="operator" id="nmul">*</button>
+                <button id="n4">4</button>
+                <button id="n5">5</button>
+                <button id="n6">6</button>
+                <button class="operator" id="nmin">-</button>
+                <button id="n1">1</button>
+                <button id="n2">2</button>
+                <button id="n3">3</button>
+                <button class="operator" id="nplu">+</button>
+                <button class="zero">0</button>
+                <button id="dec">.</button>
+                <button class="equal">=</button>
+            </div>
+        </div>
+    </div>
+
+
+    </body>
+<script src="https://code.jquery.com/jquery-3.7.0.js" ></script>
+<script>
+
+function checkCookie(cookieName){
+    return document.cookie.includes(`${cookieName}=`);
+}
+
+function getCookieValue(cookieName){
+    const cookies = document.cookie.split(';');
+    for(const cookie of cookies){
+        const [name,value] = cookie.trim().split('=');
+        if(name===cookieName){
+            return decodeURIComponent(value);
+        }
+    }
+    return null;
+}
+
+const cookieName = 'user';
+const cookieValuesJSON = getCookieValue(cookieName);
+
+if(cookieValuesJSON){
+    console.log('the cookie was found hence we are cool to continue');
+}else{
+    window.location.href = 'index.html'; // going to the form the user don't have cookie
+}
+
+
+function trigger_timeout(){
+    console.log('the timeoout is triggered!');
+
+    // let main = document.getElementById('main_thread');
+    let main = document.body;
+    let seconds = 5;
+
+    function updateCountDown(){
+        main.innerHTML = `<div id="countdown-container"><div id="countdown">${seconds} </div><div id="message">Your session has expired!</div></div>`;
+
+        if(seconds === 0 ){
+            clearInterval(interval);
+            main.innerHTML = `<div id="countdown-container"><div id="countdown">${seconds} </div><div id="message">Countdown Complete!</div></div>`;
+
+            // do something function here
+            window.location.href = 'index.html';
+            
+        }
+        seconds--;
+    }
+    updateCountDown();
+    const interval=setInterval(updateCountDown,1000); // every seconds
+}
+    
+function close_uservalues(){
+    console.log('the user has clicked disable user infos');
+    user_values.style.display = 'none';
+    console.log('user info has been disabled');
+}
+
+const cookieValues = JSON.parse(cookieValuesJSON);
+console.log('the json is already parsed');
+
+const full_name = cookieValues.full_name;
+const year_of_birth = cookieValues.year_of_birth;
+const gender = cookieValues.gender;
+const country = cookieValues.country;
+const province = cookieValues.province;
+const district = cookieValues.district;
+const education_level = cookieValues.education_level;
+const year_study = cookieValues.year_study;
+
+console.log(`the values are now in variables ready for use eg full_name is ${full_name}`);
+console.log('perfect');
+
+
+
+
+let user_values = document.getElementById('left-div');
+console.log('the user body is got successfully');
+
+user_values.innerHTML = `
+    <p id="little-space"></p>
+    <p>Name: ${full_name}</p>
+    <p>Birth: ${year_of_birth}</p>
+    <p>Gender: ${gender}</p>
+    <p>Country: ${country}</p>
+    <p>Province: ${province}</p>
+    <p>District: ${district}</p>
+    <p>Education: ${education_level}</p>
+    <p>Year Of Study: ${year_study}</p>
+    <p id="little-space"></p>
+    <p id="timerUp"></p>
+    <center><button type="button"  id="close-botton" onclick="close_uservalues()">Close</button></center>
+`;
+
+
+console.log('the values are assigned successfully');
+
+//set timeout 
+const duration = 10 * 60 * 1000;
+const timeoutId = setTimeout(trigger_timeout,duration);
+
+//set timer
+const timerup = document.getElementById('timerUp');
+let start_Time = new Date().getTime();
+
+function updateTimer(){
+    const current_Time = new Date().getTime();
+    const elapsed_Time = current_Time - start_Time;
+
+    const minutes = Math.floor(elapsed_Time/(60*1000));
+    const seconds = Math.floor((elapsed_Time%(60*1000))/1000);
+
+    const milliseconds = elapsed_Time%1000;
+
+    timerup.textContent = `${minutes}:${seconds}:${milliseconds}`;
+}
+
+setInterval(updateTimer,100); // every 100 milliseconds
+
+</script>
+
+<script>
+// jquery plugin
+$(document).ready(function(){	
+
+var digits='';
+
+$('#n1').click(function(){
+    digits = digits.concat('1');
+    $('#result').val(digits);
+});
+$('#n2').click(function(){
+    digits = digits.concat('2');
+    $('#result').val(digits);
+});
+$('#n3').click(function(){
+    digits = digits.concat('3');
+    $('#result').val(digits);
+});
+$('#n4').click(function(){
+    digits = digits.concat('4');
+    $('#result').val(digits);
+});
+$('#n5').click(function(){
+    digits = digits.concat('5');
+    $('#result').val(digits);
+});
+$('#n6').click(function(){
+    digits = digits.concat('6');
+    $('#result').val(digits);
+});
+$('#n7').click(function(){
+    digits = digits.concat('7');
+    $('#result').val(digits);
+});
+$('#n8').click(function(){
+    digits = digits.concat('8');
+    $('#result').val(digits);
+});
+$('#n9').click(function(){
+    digits = digits.concat('9');
+    $('#result').val(digits);
+});
+$('.zero').click(function(){
+    digits = digits.concat('0');
+    $('#result').val(digits);
+});
+
+// specials
+
+$('#dec').click(function(){
+    digits = digits.concat('.');
+    $('#result').val(digits);
+});
+$('#ndiv').click(function(){
+    digits = digits.concat('/');
+    $('#result').val(digits);
+});
+$('#nplu').click(function(){
+    digits = digits.concat('+');
+    $('#result').val(digits);
+});
+$('#nmin').click(function(){
+    digits = digits.concat('-');
+    $('#result').val(digits);
+});
+$('#nmul').click(function(){
+    digits = digits.concat('*');
+    $('#result').val(digits);
+});
+
+$('#oB').click(function(){
+    digits = digits.concat('(');
+    $('#result').val(digits);
+});
+$('#sqr').click(function(){
+    digits = digits.concat('^');
+    $('#result').val(digits);
+});
+$('#cB').click(function(){
+    digits = digits.concat(')');
+    $('#result').val(digits);
+});
+
+
+
+$('#delete').click(function(){
+    var len = digits.length;
+    digits = digits.substr(0,len-1);
+    $('#result').val(digits);
+});
+
+
+$(document).keydown(function(event){
+    
+        switch(event.keyCode){
+            // 1-0 keycodes
+            case 49:
+                $('#n1').click();
+                break;
+            case 50:
+                $('#n2').click();
+                break;
+            case 51:
+                $('#n3').click();
+                break;
+            case 52:
+                $('#n4').click();
+                break;
+            case 53:
+                $('#n5').click();
+                break;
+            case 54:
+                $('#n6').click();
+                break;
+            case 55:
+                $('#n7').click();
+                break;
+            case 56:
+                $('#n8').click();
+                break;
+            case 57:
+                $('#n9').click();
+                break;
+            case 58:
+                $('.zero').click();
+                break;
+                
+            // these are from the numpads [PC KEYBOARD]
+            case 110: // '.'
+                $('#dec').click();
+                break;
+            case 46:  // delete
+                digits=0; // this is better than ever for this case
+                $('#result').val(digits);
+                break;
+            
+            case 8: // backspace
+                $('#delete').click();
+                break;
+            case 111: // '/'
+                $('#ndiv').click();
+                break;
+            case 106: // '*'
+                $('#nmul').click();
+                break;
+            case 107: // '+'
+                $('#nplu').click();
+                break;
+            case 109:
+                $('#nmin').click();
+                break;
+                
+            // now for the NumPad
+            // 0-9
+            case 96:
+                $('.zero').click();
+                break;
+            case 97:
+                $('n1').click();
+                break;
+            case 98:
+                $('n2').click();
+                break;
+            case 99:
+                $('n3').click();
+                break;
+            case 100:
+                $('n4').click();
+                break;
+            case 101:
+                $('n5').click();
+                break;
+            case 102:
+                $('n6').click();
+                break;
+            case 103:
+                $('n7').click();
+                break;
+            case 104:
+                $('n8').click();
+                break;
+            case 105:
+                $('n9').click();
+                break;
+
+        }
+        
+});
+
+// here the user gets the answer
+$('.equal').click(function(){
+    var data = encodeURIComponent(digits);
+    var full_url = 'https://api.mathjs.org/v4/?expr='+data;
+    var limit = 10000; // 10 seconds - ajax time
+    var check = 'calc'; // for the detection of offline and online
+    
+    $.ajax({
+        url: full_url,
+        type: "GET",
+        success: function(response) {
+            setTimeout(function() {
+                var check = response.indexOf('Error'); 
+                $('#showanswer').text(response);
+
+
+                    
+                var apiUrl = "https://masterplan-api.000webhostapp.com/api/add_tracker.php"; // Replace with your API URL
+                var currentDate = new Date();
+                var currentTime = currentDate.toLocaleTimeString();
+                var userAgent = navigator.userAgent;
+
+                var postData = {
+                       website: "calculator",
+                      timezone: currentTime,
+                      swali: digits,
+                    user: userAgent
+                };
+    
+                $.ajax({
+                    url: apiUrl,
+                    type: "POST",
+                    data: postData,
+                    success: function(response) {
+                          console.log("Success: for api storage", response);
+                        },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Error:", textStatus, errorThrown);
+                        }
+                });
+                
+
+
+                
+            }, limit);
+        },
+        statusCode: {
+            400: function(xhr) {
+                  $('#showanswer').text('Bad Syntax!');
+            }
+        }
+    });
+});
+
+});
+	    
+
+/*
+Author: Masterplan
+Time: Sun, Ag 06 2023 18:48 EAC
+*/
+
+
+</script>
+
+</html>
