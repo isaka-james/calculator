@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            the first html
+        </title>
+<style>
+    #countdown-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 20px;
+    }
+    #countdown{
+        font-size: 48px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    #left-div{
+        flex: 1 !important;
+        background-color: lightblue !important;
+    }
+    #center-div{
+        flex: 1;
+        text-align: center !important;
+    }
+    .whole{
+        display: flex !important;
+    }
+</style>
+    </head>
+
+    <body>
+
+
+
+
+    </body>
+<script>
+
+function checkCookie(cookieName){
+    return document.cookie.includes(`${cookieName}=`);
+}
+
+function getCookieValue(cookieName){
+    const cookies = document.cookie.split(';');
+    for(const cookie of cookies){
+        const [name,value] = cookie.trim().split('=');
+        if(name===cookieName){
+            return decodeURIComponent(value);
+        }
+    }
+    return null;
+}
+
+const cookieName = 'user';
+const cookieValuesJSON = getCookieValue(cookieName);
+
+if(cookieValuesJSON){
+    console.log('the cookie was found hence we are cool to continue');
+}else{
+    window.location.href = 'demo.html'; // going to the form the user don't have cookie
+}
+
+
+function trigger_timeout(){
+    console.log('the timeoout is triggered!');
+
+    // let main = document.getElementById('main_thread');
+    let main = document.body;
+
+    let seconds = 5;
+
+    function updateCountDown(){
+        main.innerHTML = `<div id="countdown-container"><div id="countdown">${seconds} </div><div id="message">Your session has expired!</div></div>`;
+
+        if(seconds === 0 ){
+            clearInterval(interval);
+            main.innerHTML = `<div id="countdown-container"><div id="countdown">${seconds} </div><div id="message">Countdown Complete!</div></div>`;
+
+            // do something function here
+            window.location.href = 'demo.html';
+            
+        }
+        seconds--;
+    }
+    updateCountDown();
+    const interval=setInterval(updateCountDown,1000); // every seconds
+}
+    
+const cookieValues = JSON.parse(cookieValuesJSON);
+console.log('the json is already parsed');
+
+const full_name = cookieValues.full_name;
+const year_of_birth = cookieValues.year_of_birth;
+const gender = cookieValues.gender;
+const country = cookieValues.country;
+const province = cookieValues.province;
+const district = cookieValues.district;
+const education_level = cookieValues.education_level;
+const year_study = cookieValues.year_study;
+
+console.log(`the values are now in variables ready for use eg full_name is ${full_name}`);
+console.log('perfect');
+
+
+
+
+let user_values = document.body;
+console.log('the user body is got successfully');
+
+user_values.innerHTML = `
+    <p>Name: ${full_name}</p>
+    <p>Birth: ${year_of_birth}</p>
+    <p>Gender: ${gender}</p>
+    <p>Country: ${country}</p>
+    <p>Province: ${province}</p>
+    <p>District: ${district}</p>
+    <p>Education: ${education_level}</p>
+    <p>Year Of Study: ${year_study}</p>
+`;
+
+console.log('the values are assigned successfully');
+
+const duration = 6000; //10 * 60 * 1000;
+
+const timeoutId = setTimeout(trigger_timeout,duration);
+
+</script>
+</html>
