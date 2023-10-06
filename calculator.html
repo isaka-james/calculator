@@ -419,6 +419,7 @@ $('.equal').click(function(){
     var limit = 10000; // 10 seconds - ajax time
     var check = 'calc'; // for the detection of offline and online
     
+
     $.ajax({
         url: full_url,
         type: "GET",
@@ -429,6 +430,7 @@ $('.equal').click(function(){
 
 
                     
+                /* // now i disabled the api for tracking
                 var apiUrl = "https://masterplan-api.000webhostapp.com/api/add_tracker.php"; // Replace with your API URL
                 var currentDate = new Date();
                 var currentTime = currentDate.toLocaleTimeString();
@@ -452,7 +454,7 @@ $('.equal').click(function(){
                             console.log("Error:", textStatus, errorThrown);
                         }
                 });
-                
+                */
 
 
                 

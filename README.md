@@ -9,6 +9,11 @@ Welcome to the GitHub repository for the <b>jQuery Calculator</b> project! This 
 - **Development Time:** 2 hours
 - **Access the Calculator:** [jQuery Calculator](https://reprogamaco.github.io/calculator)
 
+## ⚠️ UPDATE
+- I disable the tracking analysis.
+- It is  working on **firefox** browser, other browsers not guarenteed to work!.
+- To fetch results(**calculator answers**) takes like 5 seconds, hope to improve later.
+
 ## Features
 
 - **Arithmetic Operations:** Perform basic arithmetic operations such as addition, subtraction, multiplication, and division with ease.
