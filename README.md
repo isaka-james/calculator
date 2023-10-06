@@ -10,9 +10,10 @@ Welcome to the GitHub repository for the <b>jQuery Calculator</b> project! This 
 - **Access the Calculator:** [jQuery Calculator](https://reprogamaco.github.io/calculator)
 
 ## ⚠️ UPDATE
-- I disable the tracking analysis.
+- I disabled the tracking analysis.
 - It is  working on **firefox** browser, other browsers not guarenteed to work!.
 - To fetch results(**calculator answers**) takes like 5 seconds, hope to improve later.
+
 
 ## Features
 
@@ -35,3 +36,7 @@ Welcome to the GitHub repository for the <b>jQuery Calculator</b> project! This 
 - If you encounter any issues or have suggestions for improvement, feel free to raise an issue in this repository.
 
 Thank you for checking out the jQuery Calculator project! Your feedback and contributions are greatly appreciated.
+
+
+### ⚠️ DISCLAIMER!!
+- The data you fill is only displayed on the **front-end**, It does not posted anywhere!.
