@@ -414,6 +414,9 @@ $(document).keydown(function(event){
 
 // here the user gets the answer
 $('.equal').click(function(){
+    // Because API is somewhat slow then display this while fetching
+    $('#showanswer').text('calculating..');
+    
     var data = encodeURIComponent(digits);
     var full_url = 'https://api.mathjs.org/v4/?expr='+data;
     var limit = 10000; // 10 seconds - ajax time
