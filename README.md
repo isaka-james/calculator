@@ -13,6 +13,7 @@ Welcome to the GitHub repository for the <b>jQuery Calculator</b> project! This 
 - I disabled the tracking analysis.
 - It is  working on **firefox** browser, other browsers not guarenteed to work!.
 - To fetch results(**calculator answers**) takes like 5 seconds, hope to improve later.
+- When you click **REACTIVATE SUBMISSION**, you will go directly to the calculator without filling informations, this works only if you filled the informations before!.
 
 
 ## Features
