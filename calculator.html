@@ -7,60 +7,72 @@
         <title>Advanced Calculator</title>
         <link rel="icon" type="image/jpg"  href="favicon.ico"/>
         <link rel="preconnect" href="https://api.mathjs.org">
-<style>
-    p{
-        text-align: center;
-    }
-    
-    #close-botton{
-        text-align: center;
-        background-color: #121212;
-        border: none;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
+        <style>
+            p{
+                text-align: center;
+            }
+            
+            #close-botton{
+                text-align: center;
+                background-color: #121212;
+                border: none;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
 
 
-    }
-    #countdown-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        padding: 20px;
-    }
-    #countdown{
-        font-size: 48px;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-    }
-    #left-div{
-        min-width: 340px !important;
-        flex: 0 !important;
-        background-color: lightblue !important;
-        margin-right: 10px !important;
-        border-radius: 12px;
-    }
-    #center-div{
-        min-width: 340px !important;
-        flex: 0 !important;
-        text-align: center !important;
-        margin-left: 10px;
-    }
-    .whole{
-        display: flex;
-    }
-    #little-space{
-        padding-top: 25px;
-    }
+            }
+            #countdown-container{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                background-color: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                padding: 20px;
+            }
+            #countdown{
+                font-size: 48px;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 10px;
+            }
+            #left-div{
+                min-width: 340px !important;
+                flex: 0 !important;
+                background-color: lightblue !important;
+                margin-right: 10px !important;
+                border-radius: 12px;
+            }
+            #center-div{
+                min-width: 340px !important;
+                flex: 0 !important;
+                text-align: center !important;
+                margin-left: 10px;
+            }
+            .whole{
+                display: flex;
+            }
+            #little-space{
+                padding-top: 25px;
+            }
+            
+            /* The code fonts for the whole calculator should be of type courier */
+            #center-div{
+                font-family: 'Courier New', Courier, monospace;
 
+            }
+            
+            /* Here the line should one, and it should be horizontal scroable */
+            .showanswer,
+            .h-scroll {
+                white-space: nowrap; /* Display content in a single line */
+                overflow-x: auto;    /* Enable horizontal scrolling */
+                min-width: 100%;     /* Set a minimum width to allow scrolling */
+            }
 
- 
-</style>
+        </style>
     </head>
 
     <body>
@@ -71,7 +83,7 @@
         </div>
         <div class="calculator" id="center-div">
             <div class="display">
-                <input type="text" id="result" readonly >
+                <input type="text" class="h-scroll" id="result" readonly >
                 <div id="showanswer">0</div>
             </div>
             <div class="buttons">
@@ -416,7 +428,7 @@ $(document).keydown(function(event){
 $('.equal').click(function(){
     // Because API is somewhat slow then display this while fetching
     $('#showanswer').text('calculating..');
-    
+
     var data = encodeURIComponent(digits);
     var full_url = 'https://api.mathjs.org/v4/?expr='+data;
     var limit = 10000; // 10 seconds - ajax time
