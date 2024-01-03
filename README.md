@@ -10,7 +10,7 @@ Welcome to the GitHub repository for the <b>jQuery Calculator</b> project! This 
 - **Access the Calculator:** [jQuery Calculator](https://reprogamaco.github.io/calculator)
 
 ## ⚠️ UPDATE
-- I disabled the tracking analysis.
+- I disabled the tracking analysis which is now [opensource](https://github.com/reprogamaco/backend-tracker-for-calculator).
 - It is  working on **firefox** browser, other browsers not guarenteed to work!.
 - To fetch results(**calculator answers**) takes like 5 seconds, hope to improve later.
 - When you click **REACTIVATE SUBMISSION**, you will go directly to the calculator without filling informations, this works only if you filled the informations before!.
