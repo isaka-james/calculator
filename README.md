@@ -1,5 +1,5 @@
 # jQuery Calculator with API Integration
-<img src="https://komarev.com/ghpvc/?username=reprogamaco&label=Profile%20views&color=0e75b6&style=flat" alt="Profile Views" />
+<img src="https://komarev.com/ghpvc/?username=calculator&label=calculator&color=0e75b6&style=flat" alt="Profile Views" />
 Welcome to the GitHub repository for the <b>jQuery Calculator</b> project! This simple yet powerful calculator allows you to perform basic arithmetic operations and even solve complex mathematical equations involving addition, subtraction, multiplication, division, and exponentiation. The calculator also handles infinite results gracefully, displaying "Infinity" where applicable.
 
 ## Project Overview
@@ -7,10 +7,10 @@ Welcome to the GitHub repository for the <b>jQuery Calculator</b> project! This 
 - **Calculator Type:** jQuery Calculator
 - **API Integration:** Yes, the calculator utilizes an external API to fetch answers for certain calculations.
 - **Development Time:** 2 hours
-- **Access the Calculator:** [jQuery Calculator](https://reprogamaco.github.io/calculator)
+- **Access the Calculator:** [jQuery Calculator](https://isaka-james.github.io/calculator)
 
 ## ⚠️ UPDATE
-- I disabled the tracking analysis which is now [opensource](https://github.com/reprogamaco/backend-tracker-for-calculator).
+- I disabled the tracking analysis which is now [opensource](https://github.com/isaka-james/backend-tracker-for-calculator).
 - It is  working on **firefox** browser, other browsers not guarenteed to work!.
 - To fetch results(**calculator answers**) takes like 5 seconds, hope to improve later.
 - When you click **REACTIVATE SUBMISSION**, you will go directly to the calculator without filling informations, this works only if you filled the informations before!.
@@ -26,7 +26,7 @@ Welcome to the GitHub repository for the <b>jQuery Calculator</b> project! This 
 
 ## Usage Instructions
 
-1. Visit the [jQuery Calculator](https://reprogamaco.github.io/calculator) webpage.
+1. Visit the [jQuery Calculator](https://isaka-james.github.io/calculator) webpage.
 2. Use the provided buttons and input field to enter your calculations.
 3. Click the "Calculate" button to see the result.
 
